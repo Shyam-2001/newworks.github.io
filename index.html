@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body{
+        margin: 0px;
+      }
+#mainid{
+  background-color: palevioletred;
+  width: 100%;
+  height: 100vh;
+}
+#sidebar, #content {
+  height: 100%;
+  overflow:auto;
+}
+#sidebar {
+  padding-left: 8px;
+  font-size: 30px;
+padding-top: 5%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  background:gainsboro;
+  width: 20%;
+  box-shadow: 2px 0 4px rgba(0,0,0,0.5);
+  transition: width .35s;
+}
+#btn{
+  background-color: coral;
+  outline: 0px;
+  padding: 10px 20px 10px 20px;
+  border: 0px;
+  cursor: pointer;
+}
+#sidebar.collapsed {
+  width: 0;
+}
+#id1{
+  color: antiquewhite;
+  text-align: center;
+  padding-top: 8%;
+  font-size: large;
+  width: 60%;
+  height: 400px;
+  margin-left: 20%;
+}
+#bt1{
+  border: 0px;
+  background-color: blue;
+  color: white;
+  padding: 20px 40px 20px 40px;
+  font-size: 20px;
+}
+</style>
+
+</head>
+<body>
+  <div id="mainid">
+<div id="sidebar" class="collapsed">
+ Tittle:<input type="text" id="input1"/>
+</br>
+</br>
+ Description: <textarea id="input2" rows="4" cols="30"></textarea>
+<br>
+</br>
+<newdiv>
+<button id="btn" onclick="fun1()">Submit</button>
+</newdiv>
+</div>
+
+ <div id="id1">
+<newdiv>
+<h1>Hello guys !!!</h1>
+<h2>Welcome to my website</h2>
+<h3>Lorem ipsum dolor sit, amet consectetur adipisicing  elit. At rem aspernatur necessitatibus placeat quae consequuntur qui nam facilis beatae quam odit blanditiis earum sed vero, quis corrupti velit deserunt eveniet!
+Lorem ipsum dolor sit, amet consectetur adipisicing  elit. At rem aspernatur necessitatibus placeat quae consequuntur qui nam facilis beatae quam odit blanditiis earum sed vero, quis corrupti velit deserunt eveniet!
+Lorem ipsum dolor sit, amet consectetur adipisicing  elit. At rem aspernatur necessitatibus placeat quae consequuntur qui nam facilis beatae quam odit blanditiis earum sed vero, quis corrupti velit deserunt eveniet!</h3>
+<button id="bt1">Like Us</button>
+</newdiv>
+</div>
+</div>
+<script>
+const buttons = document.querySelectorAll("newdiv");
+buttons.forEach(button =>
+  button.addEventListener("click", _ => {
+    document.getElementById("sidebar").classList.toggle("collapsed");
+  })
+);
+
+function fun1(){
+  const val1 = document.getElementById('input1').value;
+  const val2 = document.getElementById('input2').value;
+  console.log(val1);
+  console.log(val2);
+  fetch('https://reqres.in/api/users', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ "id": val1 })
+})
+.then(response => response.json())
+.then(response => console.log(JSON.stringify(response)))
+document.getElementById("input1").value = "";
+     document.getElementById("input2").value = "";
+}
+function getSelectedText() {
+  var txt;
+    if (window.getSelection) {
+        txt = window.getSelection();
+    } else if (window.document.getSelection) {
+        txt =window.document.getSelection();
+    } else if (window.document.selection) {
+        txt = window.document.selection.createRange().text;
+    }
+    alert(txt);
+}
+
+  </script>
+</html>
